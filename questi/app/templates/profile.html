@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <title>QHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+        <!--FONT-->
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script>
+        var sessions_created = {{sessions_created | tojson}}
+        var username = "{{ username }}";
+    </script>
+    
+    <style type="text/css">
+      body {
+        font-family: 'Raleway';
+        background-color: white;
+      }
+
+      .container {
+        max-width: 800px;
+        padding-top: 50px;
+        text-align: center;
+      }
+
+      .row {
+        text-align: center;
+      }
+
+      h2 {color: red;}
+      th {
+          padding-right: 50px;
+      }
+
+      .title {
+        border: 1px solid black; 
+        text-align: center; 
+        width: 500px;
+        display:inline-block;
+        padding-bottom: 10px;
+      }
+
+      .title_2 {
+        text-align: center; 
+        width: 500px;
+        display:inline-block;
+        padding-bottom: 10px;
+        margin-top: 20px;
+      }
+
+      ul.b {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+        font-size: 18px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+
+      .active {
+        background-color: #4a58a1ff;
+      }
+    </style>
+  </head>
+<body>
+<ul class="b">
+  <li><a href="/home">QHub</a></li>
+  {% if user_type == 'ta' %}
+  <li><a href="/generate">Generate Codes</a></li>
+  {% endif %}
+  <li style="float:right">
+    {% if is_authenticated == True %}
+        <a href="/profile">{{ username }}</a>
+    {% else %}
+        <a href="/logout">Logout</a>
+    {% endif %}
+  </li>
+</ul>
+
+<div class="container">
+    
+    <div class="row">
+        <div class="title">
+            <h1>Profile Details</h1>
+        </div>
+    </div>
+
+        <br/>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ username }}</td>
+                </tr>
+                <tr>
+                    <th>User Type</th>
+                    <td>
+                        {% if user_type == 'ta' %}
+                            TA
+                        {% else %}
+                            Student
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ email }}</td>
+                </tr>
+          
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+</body>
+</html>

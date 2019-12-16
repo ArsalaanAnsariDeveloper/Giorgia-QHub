@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>QHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style type="text/css">
+      body {
+        background-color: white;
+      }
+
+      .container {
+        max-width: 800px;
+        padding-top: 50px;
+        font: 'Raleway';
+      }
+      h2 {
+        color: red;
+      }
+
+      #submit {
+        background-color: #cfe2f3;
+        border: none;
+        padding: 5px;
+        border-radius: 5px;
+        width: 80px;
+        font-weight: 500;
+      }
+
+      #username, #password {
+        background-color: #f3f3f3ff;
+        border: none;
+        padding: 5px;
+      }
+
+      ul.b {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+        font-size: 18px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+
+      .active {
+        background-color: #4a58a1ff;
+      }
+
+    </style>
+  </head>
+<body>
+<ul class="b">
+  <li><a href="/">QHub</a></li>
+
+</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+</body>
+
+
+</html>
