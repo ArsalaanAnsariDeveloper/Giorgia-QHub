@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <title>QHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!--FONT-->
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script>
+        var is_authenticated = "{{ is_authenticated }}";
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'home.js') }}"></script>
+
+    <style type="text/css">
+      body {
+        font-family: 'Raleway';
+        background-color: #f3f3f3ff;
+      }
+
+      .container {
+        max-width: 800px;
+        padding-top: 20px;
+      }
+
+      .first {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .second {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-left: 60px;
+
+      }
+
+      #session_code {
+          background-color: #white;  
+          border-radius: 5px;
+          border: 1px solid #595959;
+          padding: 15px;
+          height: 20px;
+          font-size: 18px;
+          margin-right: 8px;
+      }
+
+      #enter_button {
+          background-color: #4a58a1ff;
+          border: 0px;
+          width: 60px;
+          border-radius: 5px;
+          padding: 5px;
+          color: white;
+          font-size: 18px;
+      }
+
+      ul.b {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+        font-size: 18px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+
+      .active {
+        background-color: #4a58a1ff;
+      }
+    </style>
+  </head>
+<body>
+<ul class="b">
+  <li><a href="/">QHub</a></li>
+  {% if user_type == 'ta' %}
+  <li><a href="/generate">Generate Codes</a></li>
+  {% endif %}
+  <li style="float:right">
+    {% if is_authenticated == True %}
+        <a href="/profile">{{ username }}</a>
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+  </li>
+</ul>
+
+<div class="container">
+    <br/>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="first col-md-7">
+            Join a session and post questions
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="second col-md-6"></div>
+        <div class="col-md-4"></div>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-6">
+            <input type="text" name="session_code" id="session_code" placeholder="Session Code" />
+            <input id="enter_button" type="button" value="Enter"/>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>  
+</body>
+</html>

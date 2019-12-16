@@ -1,0 +1,216 @@
+<html>
+  <head>
+    <title>QHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!--FONT-->
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <script>
+        var is_authenticated = "{{ is_authenticated }}"
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'start.js') }}"></script>
+
+    <style type="text/css">
+
+    .main {
+      height:400px;
+      width:100%;
+
+      background-repeat: no-repeat;
+      background-image: url('https://i.ibb.co/Zm5fL6h/shutterstock-675094477.jpg');
+      background-size: 100% 100%;
+      text-align: center;
+    }
+
+    .bottom {
+      margin-top: 130px;
+    }
+
+    .title {
+      font-size: 25px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .next {
+      margin-top: 30px;
+    }
+
+
+    .ta {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .student {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+
+    .list {
+      margin-left: 100px;
+      font-size: 15px;
+    }
+
+    .list_2 {
+      margin-left: 100px;
+      font-size: 15px;
+      margin-bottom: 50px;
+    }
+      body {
+        font-family: 'Raleway';
+        background-color: white;
+      }
+
+      .top {
+        padding-top: 90px;
+        font-size: 70px;
+      }
+
+      .container {
+        max-width: 800px;
+        padding-top: 20px;
+      }
+
+
+      #enter_site_button {
+          background-color: #4a58a1ff;
+          border: 1px solid white;
+          width: 260px;
+          padding: 15px;
+          color: white;
+          text-align: center; 
+          font-size: 24px;
+          font-weight: 900;
+          margin-top: 50px;
+      }
+
+      #enter_site_s_button {
+          background-color: #4a58a1ff;
+          border: 1px solid white;
+          width: 260px;
+          padding: 15px;
+          color: white;
+          text-align: center; 
+          font-size: 24px;
+          font-weight: 900;
+          margin-top: 50px;
+      }
+
+      ul.b {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+        font-size: 18px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      } 
+
+      .active {
+        background-color: white;
+      }
+
+    </style>
+  </head>
+<body>
+<ul class="b">
+  <li><a href="/">QHub</a></li>
+
+  <!--<li style="float:right"><a class="active" href="#about">Login</a></li>-->
+  <li style="float:right">
+    {% if is_authenticated == True %}
+        <a href="/profile">{{ username }}</a>
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+  </li>
+</ul>
+
+<div class="main">
+  <div class="top row">
+    Welcome to QHub
+  </div>
+
+  <div class="buttons row">
+    <div class="col-md-6">
+      <input id="enter_site_button" type="button" value="Teaching Assistant"/>
+    </div>
+    <div class="col-md-6">
+      <input id="enter_site_s_button" type="button" value="Student"/>
+    </div>
+  </div>
+
+  <div class="bottom row">
+    <div class="title">What We Do</div>
+  </div>
+
+  <div class="next row">
+    <div class="col-md-6">
+      <div class="ta">Teaching Assistants</div>
+
+      <div class="list">
+        <ul>
+          <div class="row">
+            <li>Create sessions where students can post questions</li><br>
+          </div>
+          <div class="row">
+            <li>Highlight questions being answered</li><br>
+          </div>
+          <div class="row">
+            <li>Delete duplicate questions</li><br>
+          </div>
+          <div class="row">
+            <li>Change session name</li><br>
+          </div>
+        </ul>
+    </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="student">Students</div>
+
+      <div class="list_2">
+        <ul>
+          <div class="row">
+            <li>Join sessions hosted by TA's</li><br>
+          </div>
+          <div class="row">
+            <li>Post your questions for TA's to answer live</li><br>
+          </div>
+          <div class="row">
+            <li>Upvote others' questions</li><br>
+          </div>
+          <div class="row">
+            <li>Undo upvotes on others' questions</li><br>
+          </div>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+
+
+ 
+</div>  
+</body>
+</html>

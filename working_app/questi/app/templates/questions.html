@@ -1,0 +1,253 @@
+<html>
+<head>
+     <meta http-equiv="refresh" content="5" />
+    <!-- JQuery -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet"
+          href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+    <!-- My Scripts -->
+    <script>
+        var questions = {{ questions|tojson }};
+        var username = "{{ username }}";
+        var user_type = "{{ user_type }}";
+        var session_code = "{{ session_code }}";
+    </script>
+
+    <script type="text/javascript"
+            src="{{ url_for('static', filename = 'questions.js') }}"></script>
+    <style>
+
+        #logrecipes {
+            height: 100px;
+
+            display: block;
+            margin-left: 200px;
+            margin-right: auto;
+        }
+
+        #enter_dish {
+            width: 100%;
+        }
+
+        .bottom_row_padding {
+            padding-bottom: 10px;
+        }
+
+        .black {
+            background-color: black;
+        }
+
+        #rightspace {
+            padding-right: 20px;
+        }
+
+        .space {
+            margin-right: 5px;
+            border: 0.3px solid black;
+            background-color: #C2DFFF;
+        }
+
+        header img {
+            height: 80px;
+            margin-left: 40px;
+        }
+
+        main {
+            color: white;
+        }
+
+        header {
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 25px 0 black;
+            z-index: 1000000000;
+        }
+
+        header * {
+            display: inline;
+        }
+
+        header li {
+            margin: 20px;
+        }
+
+        header li a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .title {
+            font-size: 25px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .empty {
+            margin: 30px;
+        }
+
+        .empty_2 {
+            margin: 50px;
+        }
+
+        .entering {
+            margin-bottom: 30px;
+        }
+
+        .big {
+            font-size: 20px;
+        }
+
+        .chart {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .container {
+            max-width: 800px;
+            padding-top: 100px;
+        }
+
+        .question_votes {
+            width: 20px;
+        }
+
+        .question_statement {
+            border: 1px solid #eeeeeeff;
+            margin: 0px 5px;
+            border-radius: 5px;
+            background-color: #eeeeeeff;
+            border: 1px solid #595959;
+        }
+
+        #submit_question, #session_name_edit_button {
+            background-color: #cfe2f3;
+            border-radius: 5px;
+            width: 80px;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+
+        #enter_question {
+            width: 100%;
+        }
+
+        #session_name_edit_box {
+            border-radius: 5px;
+            background-color: #eeeeeeff;
+            border: none;
+        }
+
+        .questions_list_min_width {
+            width: 770px;
+            height: 252px;
+        }
+
+        ul.b {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
+
+      li {
+        float: left;
+        font-size: 18px;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+      }
+
+      .active {
+        background-color: #4a58a1ff;
+      }
+    </style>
+
+
+</head>
+<body>
+<ul class="b">
+  <li><a href="/">QHub</a></li>
+  <li style="float:right">
+        <a href="/logout">Logout</a>
+
+  </li>
+</ul>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-7" style="text-align: center;">
+            Session: <b id="session_name_id">{{ session_name }} {{ session_code }}</b>
+                <span id="session_name_update_container" style="display: none">
+					<input type="text" id="session_name_edit_box"
+                           style="margin-left: 5px;"/>
+                    {% if user_type == 'ta' %}
+					<input type="button" id="session_name_edit_button"
+                           value="Update" style="margin-left: 5px;"/>
+                        {% endif %}
+				</span>
+        </div>
+        <div class="col-md-4" style="text-align: right;">
+            <img src="static/personicon.png" width="20px" height="20px"/>
+            <a href="/profile">{{ username }}</a>
+        </div>
+    </div>
+
+    <div class="empty"></div>
+    <div id="questions_list" class="questions_list_min_width"></div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <input id="display_more_button" class="hidden col-md-2" type="image"
+               src="static/downarrow.png" alt="Display More" width="20"
+               height="50">
+    </div>
+    <br/>
+
+    <div id="logrecipes">
+        <div class="entering">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="ui-widget">
+                        <input type="text" id="enter_question"
+                               placeholder="Question">
+                    </div>
+                </div>
+
+                <input type="button" id="submit_question" value="Enter"/>
+            </div>
+        </div>
+        <div class="empty_2"></div>
+        <br>
+    </div>
+</div>
+</body>
+</html>
